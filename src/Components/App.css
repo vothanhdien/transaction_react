@@ -1,0 +1,59 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #d1d6ff;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+ul{
+    list-style-type: none;
+    padding: 10px;
+
+}
+.option{
+    float: left;
+    width: 100%;
+    padding: 5px;
+    margin: 2px;
+}
+.btn-selected{
+    background-color: #e9e9ff;
+}
+.balance{
+    width: 98%;
+}
+.money-value{
+    font-size: 60px;
+    color: green;
+}
+.send-history{
+    background-color: rgba(255, 0, 0, 0.62);
+}
+.receive-history{
+    background-color: aqua;
+}
+.form{
+    padding: 10px;
+}
+.btn-login{
+    float: left;
+}
