@@ -13,15 +13,40 @@ class Transaction extends Component{
                 <div className="col-sm-10 col-lg-10">
                     <div className="row">
                         <div className="card balance">
-                            <div className="card-header">Chuyen tien</div>
+                            <div className="card-header">Chuyển tiền</div>
                             <div className="card-block ">
-                                <p className="money-value">ho ten</p>
+                                <div className="row">
+                                    <div className="col-3">
+                                        <p>Người nhận </p>
+                                    </div>
+                                    <div className="col-9">
+                                        <input type="text" name="" id="username" className="form-control" required="required">
+                                        </input>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-3">
+                                        <p>Số tiền </p>
+                                    </div>
+                                    <div className="col-9">
+                                        <input type="number" name="" id="value" className="form-control" required="required">
+                                        </input>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-3 offset-md-3">
+                                        <button className="btn btn-login" onClick={()=>this.send()}>Gửi</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         )
+    }
+    send(){
+        alert("send");
     }
 }
 export default  Transaction;
