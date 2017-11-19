@@ -91,7 +91,7 @@ class App extends Component {
             });
     }
     register(username,password){
-        console.log("un: " + username + " pass   "+password);
+        console.log("un: " + username + " pass   "+ password);
         axios({
             method: 'POST',
             //url: 'https://api.instagram.com/v1/locations/search?lat=10&lng=106&access_token=6079293844.e029fea.3d779429f5ad4b0fba9d206abacc3e1c',
