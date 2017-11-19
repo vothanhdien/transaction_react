@@ -13,7 +13,7 @@ class LoginForm extends Component{
 
                         </div>
                         <div className="col-9">
-                            <input type="text" name="" id="input" className="form-control" required="required">
+                            <input type="text" name="" id="username" className="form-control" required="required">
                             </input>
                         </div>
                     </div>
@@ -23,18 +23,27 @@ class LoginForm extends Component{
 
                         </div>
                         <div className="col-9">
-                            <input type="password" name="" id="input" className="form-control" required="required">
+                            <input type="password" name="" id="password" className="form-control" required="required">
                             </input>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-3 offset-md-9">
-                            <button className="btn btn-login">Login</button>
+                            <button className="btn btn-login" onClick={()=>this.login()}>Login</button>
                         </div>
                     </div>
                 </div>
             </div>
         )
+    }
+    login(){
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+        if(username.length <= 0  || password <= 0)
+            alert("Fill all the blank");
+        else{
+            this.props.onclick(username,password);
+        }
     }
 }
 

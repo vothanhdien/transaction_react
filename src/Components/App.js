@@ -7,8 +7,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Header username = {this.state.username} onClick={()=>this.logout()}/>
-                <Content/>
+                <Header username = {this.state.userId} onClick={()=>this.logout()}/>
+                <Content userId={this.state.userId}/>
                 <hr/>
                 <Footer/>
             </div>
@@ -25,6 +25,7 @@ class App extends Component {
         }
     }
     logout(){
+        this.props.logout();
         this.setState({
             username: null,
             userId: null,
