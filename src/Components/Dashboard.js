@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 import SubMenu from './SubMenu'
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 class Dashboard extends Component{
     render(){
@@ -12,20 +13,22 @@ class Dashboard extends Component{
         const reveived_history = this.state.received;
 
         let sent = sent_history.map((doc,index)=>{
-           return(
-               <tr key={index}>
+            let date = this.props.convertTime(doc.time);
+            return(
+                <tr key={index}>
                    <td>{doc.receiver}</td>
                    <td>{doc.value}</td>
-                   <td>{doc.time}</td>
-               </tr>
-           )
+                   <td>{date}</td>
+                </tr>
+            )
         });
         let received = reveived_history.map((doc,index)=>{
+            let date = this.props.convertTime(doc.time);
             return(
                 <tr key={index}>
                     <td>{doc.sender}</td>
                     <td>{doc.value}</td>
-                    <td>{doc.time}</td>
+                    <td>{date}</td>
                 </tr>
             )
         });
@@ -38,7 +41,7 @@ class Dashboard extends Component{
                     <div className="Dashboard">
                         <div className="row">
                             <div className="card balance">
-                                <div className="card-header">So du tai khoan</div>
+                                <div className="card-header">Balance</div>
                                 <div className="card-block ">
                                     <p className="money-value">{this.state.balance}$</p>
                                 </div>
@@ -46,31 +49,40 @@ class Dashboard extends Component{
                         </div>
                         <div className="row">
                             <div className="col-md">
-                                <div className="card-header send-history">Cac khoan chuyen</div>
+                                <Link to="/received_history">
+                                    <div className="card-header send-history">Sent History</div>
+                                </Link>
                                 <div className="card-block">
                                     <table className="table">
-                                        <tr>
-                                            <th>Người nhận</th>
-                                            <th>Số tiền</th>
-                                            <th>Thời gian</th>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th>Người nhận</th>
+                                                <th>Số tiền</th>
+                                                <th>Thời gian</th>
+                                            </tr>
+                                        </thead>
                                         <tbody>
-                                        {sent}
+                                            {sent}
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div className="col-md">
-                                <div className="card-header receive-history">Cac khoan nhan</div>
+                                <Link to="/received_history">
+                                    <div className="card-header receive-history">Receiver History</div>
+                                </Link>
                                 <div className="card-block">
                                     <table className="table">
-                                        <tr>
-                                            <th>Người gửi</th>
-                                            <th>Số tiền</th>
-                                            <th>Thời gian</th>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th>Người gửi</th>
+                                                <th>Số tiền</th>
+                                                <th>Thời gian</th>
+                                            </tr>
+                                        </thead>
+
                                         <tbody>
-                                        {received}
+                                            {received}
                                         </tbody>
                                     </table>
                                 </div>

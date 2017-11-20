@@ -5,7 +5,8 @@ import Footer from './Footer';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import Transaction from './Transaction'
-import History from './History'
+import SentHistory from './Sent_history'
+import ReceivedHistory from './Received_history'
 import Login from './Login'
 import Register from './Register'
 import axios from 'axios';
@@ -25,7 +26,8 @@ class App extends Component {
                         ))}/>
                     <Route exact path="/dashboard" render={() => (
                         this.state.userId ? (
-                            <Dashboard userId={this.state.userId}/>
+                            <Dashboard userId={this.state.userId}
+                                       convertTime={(time)=>this.convertTime(time)}/>
                         ) : (
                             <Redirect to="/login"/>
                         ))}/>
@@ -35,9 +37,17 @@ class App extends Component {
                         ) : (
                             <Redirect to="/login"/>
                         ))}/>
-                    <Route path="/history" render={() => (
+                    <Route path="/sent_history" render={() => (
                         this.state.userId ? (
-                            <History userId={this.state.userId}/>
+                            <SentHistory userId={this.state.userId}
+                                        convertTime={(time)=>this.convertTime(time)}/>
+                        ) : (
+                            <Redirect to="/login"/>
+                        ))}/>
+                    <Route path="/received_history" render={() => (
+                        this.state.userId ? (
+                            <ReceivedHistory userId={this.state.userId}
+                                             convertTime={(time)=>this.convertTime(time)}/>
                         ) : (
                             <Redirect to="/login"/>
                         ))}/>
@@ -45,7 +55,8 @@ class App extends Component {
                         this.state.userId ? (
                         <Redirect to="/dashboard"/>
                         ) : (
-                        <Login onclick={(username,password)=> this.login(username,password)}/>
+                        <Login onclick={(username,password)=> this.login(username,password)}
+                               showError={(text)=> this.showError(text)}/>
                         ))}/>
                     <Route path="/register" render={() => (
                         this.state.userId ? (
@@ -85,13 +96,19 @@ class App extends Component {
                 username: username,
                 password: password,
             }
-        }).then((res)=>this.changeUserId(res))
+        }).then((res)=>{
+            if(res.data.status === "success"){
+                this.changeUserId(res)
+            }else{
+                this.showError(res.data.message);
+            }
+            })
             .catch(function (error) {
-                alert("erroe" + error);
+                alert(error);
             });
     }
     register(username,password){
-        console.log("un: " + username + " pass   "+ password);
+        // console.log("un: " + username + " pass   "+ password);
         axios({
             method: 'POST',
             //url: 'https://api.instagram.com/v1/locations/search?lat=10&lng=106&access_token=6079293844.e029fea.3d779429f5ad4b0fba9d206abacc3e1c',
@@ -113,6 +130,36 @@ class App extends Component {
         }else{
             alert(response.data.message)
         }
+    }
+
+    showError(text){
+        if(document.getElementsByClassName("info-success").length > 0){
+            document.getElementsByClassName("info-success")[0].classList.add("info-error");
+            document.getElementsByClassName("info-success")[0].classList.remove("info-error");
+        }else if(document.getElementsByClassName("info-hide").length > 0){
+            document.getElementsByClassName("info-hide")[0].classList.add("info-error");
+            document.getElementsByClassName("info-hide")[0].classList.remove("info-hide");
+        }
+        document.getElementById("info-text").innerHTML = text;
+    }
+    showSuccess(){
+        if(document.getElementsByClassName("info-error").length > 0){
+            document.getElementsByClassName("info-error")[0].classList.add("info-success");
+            document.getElementsByClassName("info-error")[0].classList.remove("info-error");
+        }else if(document.getElementsByClassName("info-hide").length > 0){
+            document.getElementsByClassName("info-hide")[0].classList.add("info-success");
+            document.getElementsByClassName("info-hide")[0].classList.remove("info-hide");
+        }
+        document.getElementById("info-text").innerHTML = "Send success";
+    }
+
+    convertTime(time){
+        let date = new Date(time);
+        let res;
+        res = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " "
+            + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+        return res;
     }
 }
 

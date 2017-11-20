@@ -8,6 +8,11 @@ class LoginForm extends Component{
             <div className="row form">
                 <div className="col-md-4 offset-md-4 offset-lg-4">
                     <div className="row">
+                        <div className="col-12 info-hide">
+                            <span id="info-text"></span>
+                        </div>
+                    </div>
+                    <div className="row">
                         <div className="col-3">
                             <p>Username </p>
 
@@ -40,7 +45,7 @@ class LoginForm extends Component{
         let username = document.getElementById('username').value;
         let password = document.getElementById('password').value;
         if(username.length <= 0  || password <= 0)
-            alert("Fill all the blank");
+            this.props.showError("fill all blanks");
         else{
             this.props.onclick(username,password);
         }

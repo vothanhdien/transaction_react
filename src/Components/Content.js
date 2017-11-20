@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import Transaction from './Transaction'
-import History from './History'
+import History from './Sent_history'
 import Login from './Login'
 import Register from './Register'
 import axios from 'axios';

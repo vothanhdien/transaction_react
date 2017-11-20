@@ -28,10 +28,17 @@ class SubMenu extends Component{
 
                             </li>
                             <li>
-                                <Link to="/History">
+                                <Link to="/Sent_history">
                                     <button id="option3"
                                             className="btn btn-success-outline option"
-                                            onClick={()=>this.select("option3")}> History </button>
+                                            onClick={()=>this.select("option3")}>Sent History </button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/Received_history">
+                                    <button id="option4"
+                                            className="btn btn-success-outline option"
+                                            onClick={()=>this.select("option3")}>Received History </button>
                                 </Link>
                             </li>
                         </ul>
