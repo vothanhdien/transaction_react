@@ -7,6 +7,7 @@ import Dashboard from './Dashboard'
 import Transaction from './Transaction'
 import SentHistory from './Sent_history'
 import ReceivedHistory from './Received_history'
+import Detail from "./Detail"
 import Login from './Login'
 import Register from './Register'
 import axios from 'axios';
@@ -51,6 +52,12 @@ class App extends Component {
                         ) : (
                             <Redirect to="/login"/>
                         ))}/>
+                    <Route path="/detail" render={() => (
+                        this.state.userId ? (
+                            <Detail userId={this.state.userId}/>
+                        ) : (
+                            <Redirect to="/login"/>
+                        ))}/>
                     <Route path="/login" render={() => (
                         this.state.userId ? (
                         <Redirect to="/dashboard"/>
@@ -71,24 +78,29 @@ class App extends Component {
 
     constructor(props){
         super(props);
-
+        let userId = null;
+        if(typeof(Storage) !== "undefined"){
+            userId = localStorage.userId;
+        }else{
+            alert("Sorry your browser can't save the state so you will be log out if refresh page");
+        }
+        //local storage
         this.state = {
             username: null,
-            userId: null,
+            userId: userId,
             balance: 0,
         }
     }
     logout(){
+        if(typeof(Storage) !== "undefined") {
+            localStorage.setItem("userId", null);
+        }
         this.setState({
             username: null,
             userId: null,
         })
     }
     login(username,password){
-        // this.router.push('/dashboard');
-        // this.setState({
-        //     userId: 123123,
-        // });
         axios({
             method: 'POST',
             url: 'http://localhost:3000/api/account/login',
@@ -98,7 +110,7 @@ class App extends Component {
             }
         }).then((res)=>{
             if(res.data.status === "success"){
-                this.changeUserId(res)
+                this.changeUserId(res.data.message);
             }else{
                 this.showError(res.data.message);
             }
@@ -107,29 +119,34 @@ class App extends Component {
                 alert(error);
             });
     }
-    register(username,password){
+    register(email,password){
         // console.log("un: " + username + " pass   "+ password);
         axios({
             method: 'POST',
             //url: 'https://api.instagram.com/v1/locations/search?lat=10&lng=106&access_token=6079293844.e029fea.3d779429f5ad4b0fba9d206abacc3e1c',
             url:"http://localhost:3000/api/account/register",
             data:{
-                username: username,
+                email: email,
                 password: password,
             }
-        }).then((res)=>this.changeUserId(res))
+        }).then((res)=>{
+            if(res.data.status === "success"){
+                this.changeUserId(res.data.message);
+                this.showAttention();
+            }else{
+                this.showError(res.data.message);
+            }})
             .catch(function (error) {
                 alert(error);
             });
     }
-    changeUserId(response){
-        if(response.data.status === 'success'){
-            this.setState({
-                userId: response.data.message,
-            });
-        }else{
-            alert(response.data.message)
+    changeUserId(id){
+        if(typeof(Storage) !== "undefined") {
+            localStorage.setItem("userId", id);
         }
+        this.setState({
+            userId: id,
+        });
     }
 
     showError(text){
@@ -160,6 +177,10 @@ class App extends Component {
             + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
         return res;
+    }
+    showAttention(){
+        if(document.getElementsByClassName("attention-hide"))
+            document.getElementsByClassName("attention-hide")[0].classList.remove("attention-hide");
     }
 }
 

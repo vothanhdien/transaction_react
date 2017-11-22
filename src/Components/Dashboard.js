@@ -40,6 +40,16 @@ class Dashboard extends Component{
                 <div className="col-sm-10 col-lg-10">
                     <div className="Dashboard">
                         <div className="row">
+                            <div className="card balance attention-hide">
+                                <div className="card-header attention-header">Attention</div>
+                                <div className="card-block ">
+                                    <p>use this Wallet ID for your next login</p>
+                                    <input className="walletid" defaultValue={this.props.userId} readOnly={true}/>
+                                    <p>You can see your Wallet ID in account >> Detail</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
                             <div className="card balance">
                                 <div className="card-header">Balance</div>
                                 <div className="card-block ">
@@ -56,9 +66,9 @@ class Dashboard extends Component{
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th>Người nhận</th>
-                                                <th>Số tiền</th>
-                                                <th>Thời gian</th>
+                                                <th>Receiver</th>
+                                                <th>Value</th>
+                                                <th>Time</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -75,9 +85,9 @@ class Dashboard extends Component{
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th>Người gửi</th>
-                                                <th>Số tiền</th>
-                                                <th>Thời gian</th>
+                                                <th>Sender</th>
+                                                <th>Value</th>
+                                                <th>Time</th>
                                             </tr>
                                         </thead>
 

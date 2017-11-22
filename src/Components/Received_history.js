@@ -26,9 +26,9 @@ class Sent_history extends Component{
                     <table className="table">
                         <thead>
                         <tr>
-                            <th>Người gửi</th>
-                            <th>Số tiền</th>
-                            <th>Thời gian</th>
+                            <th>Sender</th>
+                            <th>Value</th>
+                            <th>Time</th>
                         </tr>
                         </thead>
                         <tbody>

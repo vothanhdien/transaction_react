@@ -6,13 +6,17 @@
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
-
+body{
+    background-color: lavender;
+}
 .App-header {
   background-color: #d1d6ff;
   color: white;
     margin-bottom: 5px;
 }
-
+footer{
+    background-color: #d1d6ff;
+}
 .App-title {
   font-size: 1.5em;
 }
@@ -53,8 +57,8 @@ ul{
 .receive-history{
     background-color: aqua;
 }
-.form{
-    padding: 10px;
+row{
+    width: 99%;
 }
 .btn-login{
     float: left;
@@ -87,4 +91,23 @@ ul{
     margin-top: 5px;
     margin-bottom: 5px;
     visibility: visible;
+}
+.attention-header{
+    background-color: red;
+}
+.attention-hide{
+    display: none;
+}
+.walletid{
+    width: 220px;
+}
+.login-form{
+    background-color: #d1d6ff;
+    padding-top: 30px;
+    margin-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+}
+p{
+    padding-top: 5px;
 }

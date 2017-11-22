@@ -1,40 +1,22 @@
 /**
- * Created by HP on 19/11/2017.
+ * Created by HP on 22/11/2017.
  */
 import React, { Component } from 'react';
 import SubMenu from './SubMenu'
 import axios from 'axios'
 class Sent_history extends Component{
     render(){
-        const HistoryList = this.state.history;
-        let history = HistoryList.map((doc,index)=>{
-            let date = this.props.convertTime(doc.time);
-            return(
-                <tr key={index}>
-                    <td>{doc.receiver}</td>
-                    <td>{doc.value}</td>
-                    <td>{date}</td>
-                </tr>
-            )
-        });
         return(
             <div className="row">
                 <div className=" col-sm-2 col-lg-2">
-                    <SubMenu value="option3"/>
+                    <SubMenu/>
                 </div>
                 <div className="col-sm-10 col-lg-10">
-                    <table className="table">
-                        <thead>
-                        <tr>
-                            <th>Receiver</th>
-                            <th>Value</th>
-                            <th>Time</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {history}
-                        </tbody>
-                    </table>
+                    <div className="col-md-4 offset-md-4 offset-lg-4 login-form">
+                        <h1>Account Detail</h1>
+                        <span>Wallet ID </span>
+                        <input className="walletid" defaultValue={this.props.userId} readOnly={true}/>
+                    </div>
                 </div>
             </div>
         )

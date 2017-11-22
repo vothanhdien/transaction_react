@@ -10,15 +10,32 @@ class Header extends Component{
             {
                 return(
                     <div className="act">
-                        <Link to="/login">Login</Link>
-                        <span> or </span>
-                        <Link to="/register">Register</Link>
+
                     </div>
                 )
             }else{
                 return(
                     <div className="act">
-                        <Link to="/Login" onClick={()=>this.props.onClick()}>Logout</Link>
+                        <div className="act">
+                            <div className="dropdown">
+                                <button className="btn btn-secondary dropdown-toggle"
+                                        type="button"
+                                        id="dropdownMenuButton"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false">
+                                    Account
+                                </button>
+                                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <Link to="/detail" className="dropdown-item">
+                                        Detail
+                                    </Link>
+                                    <Link to="/login" className="dropdown-item" onClick={()=>this.props.onClick()}>
+                                        Log out
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )
             }
